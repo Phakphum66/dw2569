@@ -1,0 +1,46 @@
+{% extends 'web_sales/base.html' %}
+
+{% block content %}
+    <!-- Hero Banner -->
+    <div class="banner">
+        <div style="text-align: center;">
+            <h2 style="color: #d13010;">ลดแรงแซงทะลุจอ!</h2>
+            <p style="font-size: 1.2rem;">Shopee สไตล์พรีเมียม ช้อปคุ้มกว่าที่เคย</p>
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="section-title">หมวดหมู่สินค้า</div>
+    <div class="categories-grid">
+        {% for cat in categories %}
+        <div class="category-item">
+            <div class="category-icon"><i class="{{ cat.icon }}"></i></div>
+            <div class="category-name">{{ cat.name }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Daily Discover (Product Grid) -->
+    <div class="section-title" style="text-align: center; color: var(--primary-color); border-top: 4px solid var(--primary-color);">
+        ค้นพบสิ่งใหม่ทุกวัน
+    </div>
+    <div class="product-grid" style="margin-top: 10px;">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('{{ product.image_url }}'); background-size: cover; background-position: center;">
+                {% if product.discount %}
+                <div class="product-badge">{{ product.discount }}</div>
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <div class="product-name">{{ product.name }}</div>
+                <div class="product-price-row">
+                    <span class="product-currency">฿</span>
+                    <span class="product-price">{{ product.price }}</span>
+                </div>
+                <div class="product-sales">ขายแล้ว {{ product.sales }} ชิ้น</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

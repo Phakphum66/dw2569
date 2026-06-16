@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Phakphum66 - ช้อปปิ้งออนไลน์{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'web_sales/css/style.css' %}">
+    <!-- Load FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="header-top-left">
+                <span>ยินดีต้อนรับสู่แพลตฟอร์ม Phakphum66</span>
+            </div>
+            <div class="header-top-links">
+                <a href="#"><i class="far fa-bell"></i> การแจ้งเตือน</a>
+                <a href="#"><i class="far fa-question-circle"></i> ช่วยเหลือ</a>
+                <a href="#">สมัครใหม่</a>
+                <a href="#">เข้าสู่ระบบ</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                Phakphum66
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="ค้นหาสินค้า แบรนด์ และร้านค้า">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">3</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+            &copy; 2026 Phakphum66 Platform. สงวนลิขสิทธิ์ทั้งหมด.<br>
+            ระบบขายหน้าเว็บ - สถาปัตยกรรมตัวอย่าง
+        </div>
+    </footer>
+</body>
+
+</html>
