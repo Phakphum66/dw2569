@@ -4,8 +4,8 @@
     <!-- Hero Banner -->
     <div class="banner">
         <div style="text-align: center;">
-            <h2 style="color: #d13010;">ลดแรงแซงทะลุจอ!</h2>
-            <p style="font-size: 1.2rem;">Shopee สไตล์พรีเมียม ช้อปคุ้มกว่าที่เคย</p>
+            <h2 style="color: #312e81;">ลดแรงแซงทะลุจอ!</h2>
+            <p style="font-size: 1.2rem;">สไตล์พรีเมียม ช้อปคุ้มกว่าที่เคย</p>
         </div>
     </div>
 
@@ -28,8 +28,8 @@
         {% for product in products %}
         <div class="product-card">
             <div class="product-image" style="background-image: url('{{ product.image_url }}'); background-size: cover; background-position: center;">
-                {% if product.discount %}
-                <div class="product-badge">{{ product.discount }}</div>
+                {% if product.discount_percent > 0 %}
+                <div class="product-badge">-{{ product.discount_percent }}%</div>
                 {% endif %}
             </div>
             <div class="product-info">
@@ -38,7 +38,13 @@
                     <span class="product-currency">฿</span>
                     <span class="product-price">{{ product.price }}</span>
                 </div>
-                <div class="product-sales">ขายแล้ว {{ product.sales }} ชิ้น</div>
+                <div class="product-sales">ขายแล้ว {{ product.sales_count }} ชิ้น</div>
+                <form action="{% url 'web_sales:add_to_cart' product.id %}" method="POST" style="margin-top: 10px;">
+                    {% csrf_token %}
+                    <button type="submit" style="width: 100%; padding: 8px; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-cart-plus"></i> เพิ่มลงรถเข็น
+                    </button>
+                </form>
             </div>
         </div>
         {% endfor %}

@@ -1,0 +1,50 @@
+{% extends 'web_sales/base.html' %}
+
+{% block title %}ตะกร้าสินค้า - Phakphum66{% endblock %}
+
+{% block content %}
+<div style="background-color: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: var(--shadow-sm);">
+    <h2 style="margin-bottom: 20px; color: var(--primary-color);">ตะกร้าสินค้าของคุณ</h2>
+
+    {% if cart.items.all %}
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 2px solid #eee; text-align: left;">
+                    <th style="padding: 10px;">สินค้า</th>
+                    <th style="padding: 10px;">ราคาต่อชิ้น</th>
+                    <th style="padding: 10px;">จำนวน</th>
+                    <th style="padding: 10px;">รวม</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 15px 10px; display: flex; align-items: center;">
+                        <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
+                        <span>{{ item.product.name }}</span>
+                    </td>
+                    <td style="padding: 15px 10px;">฿{{ item.product.price }}</td>
+                    <td style="padding: 15px 10px;">{{ item.quantity }}</td>
+                    <td style="padding: 15px 10px; color: var(--primary-color); font-weight: bold;">
+                        <!-- To make this dynamic, you'd calculate price * quantity in the view or a custom template tag -->
+                        ฿{{ item.product.price }} 
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 30px; text-align: right;">
+            <button style="padding: 12px 24px; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; font-size: 1.1rem; cursor: pointer;">
+                ชำระเงิน
+            </button>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 50px 0;">
+            <i class="fas fa-shopping-cart fa-4x" style="color: #ccc; margin-bottom: 20px;"></i>
+            <p style="color: #777; font-size: 1.2rem;">ตะกร้าสินค้าของคุณยังว่างเปล่า</p>
+            <a href="{% url 'web_sales:home' %}" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: var(--primary-color); color: white; border-radius: 4px;">กลับไปช้อปปิ้ง</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

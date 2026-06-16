@@ -18,6 +18,7 @@
                 <span>ยินดีต้อนรับสู่แพลตฟอร์ม Phakphum66</span>
             </div>
             <div class="header-top-links">
+                <a href="/inventory/"><i class="fas fa-user-shield"></i> ระบบหลังบ้าน (Admin)</a>
                 <a href="#"><i class="far fa-bell"></i> การแจ้งเตือน</a>
                 <a href="#"><i class="far fa-question-circle"></i> ช่วยเหลือ</a>
                 <a href="#">สมัครใหม่</a>
@@ -30,12 +31,18 @@
                 Phakphum66
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="ค้นหาสินค้า แบรนด์ และร้านค้า">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <form action="{% url 'web_sales:home' %}" method="GET" style="display: flex; width: 100%;">
+                    <input type="text" name="q" value="{{ search_query|default:'' }}" placeholder="ค้นหาสินค้า แบรนด์ และร้านค้า" style="flex: 1;">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
             </div>
             <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-badge">3</span>
+                <a href="{% url 'web_sales:view_cart' %}" style="color: white; text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    {% if cart_items_count > 0 %}
+                    <span class="cart-badge">{{ cart_items_count }}</span>
+                    {% endif %}
+                </a>
             </div>
         </div>
     </header>

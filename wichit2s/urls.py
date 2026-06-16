@@ -22,4 +22,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/sales/', permanent=False)),
     path('admin/', admin.site.urls),
     path('sales/', include('web_sales.urls')),
+    path('inventory/', include('inventory.urls')),
+    path('marketing/', include('marketing.urls')),
+    path('transportation/', include('logistics.urls')),
 ]
