@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - Phakphum66</title>
+    <link rel="stylesheet" href="{% static 'web_sales/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+        }
+        .login-container h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .login-form input[type="submit"]:hover {
+            background-color: var(--primary-hover);
+        }
+        .error-message {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .login-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .login-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .help-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: var(--bg-color);">
+    <div class="login-container">
+        <h2><i class="fas fa-shopping-bag"></i> Phakphum66</h2>
+        <h3 style="text-align: center; margin-bottom: 20px;">เข้าสู่ระบบ</h3>
+
+        {% if form.errors %}
+        <div class="error-message">
+            ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง
+        </div>
+        {% endif %}
+
+        <form class="login-form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="ชื่อผู้ใช้" required autofocus>
+            <input type="password" name="password" placeholder="รหัสผ่าน" required>
+            <input type="hidden" name="next" value="{{ next }}">
+            <input type="submit" value="เข้าสู่ระบบ">
+        </form>
+
+        <div class="help-text">
+            <p>บัญชีทดสอบ: <strong>admin</strong> / <strong>admin123</strong></p>
+        </div>
+
+        <div class="login-links">
+            <a href="/"><i class="fas fa-arrow-left"></i> กลับไปหน้าร้าน</a>
+        </div>
+    </div>
+</body>
+</html>

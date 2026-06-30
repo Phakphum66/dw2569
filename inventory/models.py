@@ -1,4 +1,7 @@
+from decimal import Decimal
+
 from django.db import models
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -6,6 +9,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.SET_NULL, null=True, blank=True)
@@ -22,3 +26,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_discounted_price(self):
+        if self.discount_percent > 0:
+            mult = Decimal(1) - Decimal(self.discount_percent) / Decimal(100)
+            return (self.price * mult).quantize(Decimal('0.01'))
+        return self.price

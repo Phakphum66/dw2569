@@ -33,13 +33,15 @@ class Order(models.Model):
         max_length=20,
         choices=StatusChoices.choices,
         default=StatusChoices.PENDING,
+        db_index=True,
     )
     transaction_status = models.CharField(
         max_length=20,
         choices=TransactionStatusChoices.choices,
         default=TransactionStatusChoices.PENDING,
+        db_index=True,
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

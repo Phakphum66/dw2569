@@ -1,0 +1,51 @@
+{% extends 'web_sales/base.html' %}
+
+{% block title %}ชำระเงินสำเร็จ - Phakphum66{% endblock %}
+
+{% block content %}
+<div style="background-color: white; padding: 30px; border-radius: 8px; margin-top: 20px; box-shadow: var(--shadow-sm); text-align: center;">
+    <div style="font-size: 4rem; color: #16a34a; margin-bottom: 20px;">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h2 style="color: var(--primary-color); margin-bottom: 10px;">ชำระเงินสำเร็จ!</h2>
+    <p style="color: #666; font-size: 1.1rem; margin-bottom: 20px;">
+        คำสั่งซื้อของคุณถูกสร้างเรียบร้อยแล้ว
+    </p>
+
+    <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; max-width: 500px; margin: 0 auto 30px auto; text-align: left;">
+        <h3 style="margin-bottom: 15px; font-size: 1rem; color: #333;">รายละเอียดคำสั่งซื้อ</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+            <thead>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <th style="padding: 8px 4px; text-align: left;">เลขที่คำสั่งซื้อ</th>
+                    <th style="padding: 8px 4px; text-align: left;">สินค้า</th>
+                    <th style="padding: 8px 4px; text-align: right;">จำนวน</th>
+                    <th style="padding: 8px 4px; text-align: right;">ราคา</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr style="border-bottom: 1px solid #f3f4f6;">
+                    <td style="padding: 8px 4px; font-size: 0.8rem; color: #6b7280;">{{ order.order_number }}</td>
+                    <td style="padding: 8px 4px;">{{ order.product.name|default:"-" }}</td>
+                    <td style="padding: 8px 4px; text-align: right;">{{ order.quantity }}</td>
+                    <td style="padding: 8px 4px; text-align: right; font-weight: bold;">฿{{ order.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="padding: 12px 4px 4px 4px; text-align: right; font-weight: bold;">รวมทั้งสิ้น</td>
+                    <td style="padding: 12px 4px 4px 4px; text-align: right; font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">฿{{ total_amount }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 10px;">
+        <a href="{% url 'web_sales:home' %}" style="padding: 12px 24px; background-color: var(--primary-color); color: white; border-radius: 4px; text-decoration: none;">
+            กลับไปช้อปปิ้งต่อ
+        </a>
+    </div>
+</div>
+{% endblock %}
